@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import Home, { path as homePath } from './routes/Home/Home'
 import ArticlesRoutes, { path as articlesPath } from './routes/Articles'
+import NotFound from './routes/NotFound/NotFound'
 
 
 function App() {
@@ -29,6 +30,10 @@ function App() {
 
         <Route path={articlesPath}>
           <ArticlesRoutes/>
+        </Route>
+
+        <Route>
+          <NotFound/>
         </Route>
       </Switch>
     </Router>

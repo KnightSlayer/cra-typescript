@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route } from "react-router-dom";
 import ArticlesList, { path as listPath } from "./List/ArticlesList";
 import ArticlesById, { path as byIdPath } from "./ById/ArticlesById";
+import NotFound from "../NotFound/NotFound";
 
 
 const Routes = () => (
@@ -12,6 +13,10 @@ const Routes = () => (
 
     <Route exact path={byIdPath}>
       <ArticlesById/>
+    </Route>
+
+    <Route>
+      <NotFound/>
     </Route>
   </Switch>
 )
