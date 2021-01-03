@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import articlesPath from "./path";
+import articlesPath from "../path";
 
-const Articles = () => (
+const ArticlesList = () => (
   <div>
     <h1> Articles </h1>
 
@@ -12,5 +12,5 @@ const Articles = () => (
   </div>
 )
 
-export default Articles
+export default ArticlesList
 export const path = articlesPath

@@ -5,8 +5,8 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import Home, { path as homePath} from './routes/Home/Home'
-import Articles, { path as articlesPath} from './routes/Articles/Articles'
+import Home, { path as homePath } from './routes/Home/Home'
+import ArticlesRoutes, { path as articlesPath } from './routes/Articles'
 
 
 function App() {
@@ -26,8 +26,9 @@ function App() {
         <Route path={homePath} exact>
           <Home/>
         </Route>
-        <Route path={articlesPath} exact>
-          <Articles/>
+
+        <Route path={articlesPath}>
+          <ArticlesRoutes/>
         </Route>
       </Switch>
     </Router>
