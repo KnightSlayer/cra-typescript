@@ -12,7 +12,7 @@ const Routes = () => (
     </Route>
 
     <Route exact path={byIdPath}>
-      <ArticlesById/>
+      <ArticlesById foo="bar"/>
     </Route>
 
     <Route>
