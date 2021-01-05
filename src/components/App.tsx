@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import Home, { path as homePath } from './routes/Home/Home'
 import ArticlesRoutes, { path as articlesPath } from './routes/Articles'
+import Counter, { path as counterPath } from './routes/Counter/Counter'
 import NotFound from './routes/NotFound/NotFound'
 
 
@@ -21,6 +22,9 @@ function App() {
           <li>
             <Link to={articlesPath}>Articles</Link>
           </li>
+          <li>
+            <Link to={counterPath}>Counter</Link>
+          </li>
         </ul>
       </nav>
       <Switch>
@@ -30,6 +34,10 @@ function App() {
 
         <Route path={articlesPath}>
           <ArticlesRoutes/>
+        </Route>
+
+        <Route path={counterPath} exact>
+          <Counter/>
         </Route>
 
         <Route>
