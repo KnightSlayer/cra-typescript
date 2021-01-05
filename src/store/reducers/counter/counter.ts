@@ -11,11 +11,14 @@ const counterSlice = createSlice({
     },
     decremented: state => {
       state.value -= 1;
-    }
+    },
+    arbitraryDelta: (state, action: {type: string, payload: number}) => {
+      state.value += action.payload;
+    },
   }
 })
 
-export const { incremented, decremented } = counterSlice.actions;
+export const { incremented, decremented, arbitraryDelta } = counterSlice.actions;
 
 export default counterSlice.reducer;
 
