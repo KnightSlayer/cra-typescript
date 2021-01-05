@@ -1,10 +1,16 @@
 import { createSlice, PayloadAction  } from '@reduxjs/toolkit'
 
+type TCounter = {
+  value: number,
+}
+
+const initialState: TCounter = {
+  value: 0,
+}
+
 const counterSlice = createSlice({
   name: 'counter',
-  initialState: {
-    value: 0
-  },
+  initialState,
   reducers: {
     incremented: state => {
       state.value += 1;
