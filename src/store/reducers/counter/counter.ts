@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction  } from '@reduxjs/toolkit'
 
-type TCounter = {
+type TCounterState = {
   value: number,
 }
 
-const initialState: TCounter = {
+const initialState: TCounterState = {
   value: 0,
 }
 
