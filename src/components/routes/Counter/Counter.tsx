@@ -1,6 +1,6 @@
 import React from 'react';
-import { IRootState } from "store/createStore";
 import { useDispatch, useSelector } from "react-redux";
+import { IRootState } from "store/store";
 import { incremented, decremented } from "store/reducers/counter/counter"
 
 const Counter = () => {
@@ -19,6 +19,6 @@ const Counter = () => {
   )
 }
 
-export default Counter;
+export default React.memo(Counter);
 export { default as path } from './path';
 

@@ -24,5 +24,5 @@ const ArticlesById = (props: IArticle) => {
   )
 }
 
-export default ArticlesById
+export default React.memo(ArticlesById);
 export { default as path } from './path';

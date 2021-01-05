@@ -22,6 +22,6 @@ const Home = () => (
   </div>
 )
 
-export default Home;
+export default React.memo(Home);
 export {default as path} from './path'; // реэкспортировать default
 

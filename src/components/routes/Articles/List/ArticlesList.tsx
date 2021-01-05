@@ -12,5 +12,5 @@ const ArticlesList = () => (
   </div>
 )
 
-export default ArticlesList
+export default React.memo(ArticlesList)
 export const path = articlesPath
