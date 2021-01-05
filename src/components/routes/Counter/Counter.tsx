@@ -1,11 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { IRootState } from "store/store";
+import { TRootState } from "store/rootReducer";
 import { incremented, decremented, arbitraryDelta } from "store/reducers/counter/counter"
 
 const Counter = () => {
   const dispatch = useDispatch();
-  const value = useSelector((state: IRootState) => state.counter.value)
+  const value = useSelector((state: TRootState) => state.counter.value)
 
   return (
     <div>

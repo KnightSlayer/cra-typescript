@@ -21,7 +21,3 @@ const counterSlice = createSlice({
 export const { incremented, decremented, arbitraryDelta } = counterSlice.actions;
 
 export default counterSlice.reducer;
-
-export interface ICounter {
-  value: number,
-}

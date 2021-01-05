@@ -1,20 +1,22 @@
 import { configureStore } from '@reduxjs/toolkit';
-import counter, { ICounter } from "./reducers/counter/counter";
+import rootReducer from "./rootReducer";
 
-export interface IRootState {
-  counter: ICounter,
+const store = configureStore({
+  reducer: rootReducer,
+  middleware: [],
+  devTools: process.env.NODE_ENV === 'development',
+  preloadedState: (window as any).__REDUX_INITIAL_STATE__,
+  enhancers: [],
+})
+
+if (process.env.NODE_ENV === 'development' && module.hot) {
+  module.hot.accept('./rootReducer', () => {
+    console.log('hot replacement of root reducer')
+    const newRootReducer = require('./rootReducer').default
+    store.replaceReducer(newRootReducer)
+  });
 }
 
-const createStore = (preloadedState: IRootState) => {
-  return configureStore({
-    reducer: {
-      counter,
-    },
-    middleware: [],
-    devTools: process.env.NODE_ENV === 'development',
-    preloadedState,
-    enhancers: [],
-  })
-}
+export type AppDispatch = typeof store.dispatch
 
-export default createStore((window as any).__REDUX_INITIAL_STATE__);
+export default store;
