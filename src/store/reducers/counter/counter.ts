@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction  } from '@reduxjs/toolkit'
 
 const counterSlice = createSlice({
   name: 'counter',
@@ -12,7 +12,7 @@ const counterSlice = createSlice({
     decremented: state => {
       state.value -= 1;
     },
-    arbitraryDelta: (state, action: {type: string, payload: number}) => {
+    arbitraryDelta: (state, action: PayloadAction<number>) => {
       state.value += action.payload;
     },
   }
