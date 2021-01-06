@@ -1,4 +1,6 @@
-import { createSlice, PayloadAction  } from '@reduxjs/toolkit'
+import { createSlice, Action, PayloadAction } from '@reduxjs/toolkit'
+import { ThunkAction } from "redux-thunk";
+import { TRootState } from "store/rootReducer";
 
 type TCounterState = {
   value: number,
@@ -27,3 +29,13 @@ const counterSlice = createSlice({
 export const { incremented, decremented, arbitraryDelta } = counterSlice.actions;
 
 export default counterSlice.reducer;
+
+export const randomShift = (module: number): ThunkAction<Promise<number>, TRootState, unknown, Action<string>> =>
+  async dispatch => {
+    await new Promise(resolve => setTimeout(resolve, 1111))
+    const delta = Math.round(Math.random() * 2 * module - module);
+
+    dispatch(arbitraryDelta(delta));
+
+    return delta;
+  }
