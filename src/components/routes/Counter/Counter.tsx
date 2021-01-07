@@ -4,6 +4,8 @@ import { useAppDispatch, TRootState } from 'store/store';
 import { incremented, decremented, arbitraryDelta, randomShift } from "store/reducers/counter/counter"
 
 const Counter = () => {
+  // const dispatch = useDispatch<AppDispatch>();
+  // const dispatch: AppDispatch = useDispatch();
   const dispatch = useAppDispatch();
   const value = useSelector((state: TRootState) => state.counter.value);
 
