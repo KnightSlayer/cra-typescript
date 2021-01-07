@@ -1,5 +1,6 @@
 import { configureStore, Action, getDefaultMiddleware } from '@reduxjs/toolkit';
 import { ThunkAction } from 'redux-thunk';
+import { useDispatch } from 'react-redux';
 import rootReducer, { TRootState } from "./rootReducer";
 
 export type AppThunk = ThunkAction<void, TRootState, unknown, Action<string>>
@@ -20,6 +21,8 @@ if (process.env.NODE_ENV === 'development' && module.hot) {
   });
 }
 
-export type AppDispatch = typeof store.dispatch
+export type { TRootState } from './rootReducer';
+export type AppDispatch = typeof store.dispatch;
+export const useAppDispatch = () => useDispatch<AppDispatch>();
 
 export default store;

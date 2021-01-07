@@ -1,11 +1,11 @@
 import React from 'react';
-import { useDispatch, useSelector } from "react-redux";
-import { TRootState } from "store/rootReducer";
+import { useSelector } from "react-redux";
+import { useAppDispatch, TRootState } from 'store/store';
 import { incremented, decremented, arbitraryDelta, randomShift } from "store/reducers/counter/counter"
 
 const Counter = () => {
-  const dispatch = useDispatch();
-  const value = useSelector((state: TRootState) => state.counter.value)
+  const dispatch = useAppDispatch();
+  const value = useSelector((state: TRootState) => state.counter.value);
 
   return (
     <div>
@@ -17,8 +17,8 @@ const Counter = () => {
       <button onClick={() => dispatch(decremented())}> -1 </button>
       <button onClick={() => dispatch(arbitraryDelta(10))}> +10 </button>
       <button onClick={async () => {
-        const randomDelta = await dispatch(randomShift(10))
-        console.log(`random was ${randomDelta}`)
+        const randomDelta: number = await dispatch(randomShift(10));
+        console.log(`random was ${randomDelta}`);
       }}> ? </button>
     </div>
   )

@@ -30,12 +30,13 @@ export const { incremented, decremented, arbitraryDelta } = counterSlice.actions
 
 export default counterSlice.reducer;
 
-export const randomShift = (module: number): ThunkAction<Promise<number>, TRootState, unknown, Action<string>> =>
-  async dispatch => {
-    await new Promise(resolve => setTimeout(resolve, 1111))
-    const delta = Math.round(Math.random() * 2 * module - module);
+type MyThunkType<Return> = ThunkAction<Return, TRootState, unknown, Action<string>>
 
-    dispatch(arbitraryDelta(delta));
+export const randomShift = (module: number): MyThunkType<Promise<number>> => async dispatch => {
+  await new Promise(resolve => setTimeout(resolve, 1111))
+  const delta = Math.round(Math.random() * 2 * module - module);
 
-    return delta;
-  }
+  dispatch(arbitraryDelta(delta));
+
+  return delta;
+}
