@@ -1,13 +1,14 @@
-import { configureStore, Action, getDefaultMiddleware } from '@reduxjs/toolkit';
-import { ThunkAction } from 'redux-thunk';
+import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
-import rootReducer, { TRootState } from "./rootReducer";
-
-export type AppThunk = ThunkAction<void, TRootState, unknown, Action<string>>
+import rootReducer from "./rootReducer";
 
 const store = configureStore({
   reducer: rootReducer,
-  middleware: [...getDefaultMiddleware()],
+  middleware: getDefaultMiddleware => {
+    return getDefaultMiddleware()
+      // .prepend(logger)
+      // .concat(logger)
+  },
   devTools: process.env.NODE_ENV === 'development',
   preloadedState: (window as any).__REDUX_INITIAL_STATE__,
   // enhancers: [],
