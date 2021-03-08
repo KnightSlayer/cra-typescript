@@ -22,14 +22,14 @@ const counterSlice = createSlice({
     decremented: state => {
       state.value -= 1;
     },
-    asyncDelta: (state,
+    sagaAsyncRandom: (state,
                  action: PayloadAction<number>) => state,
     arbitraryDelta: (state, action: PayloadAction<number>) => {
       state.value += action.payload;
     },
   }
 })
-export const { incremented, asyncDelta, decremented, arbitraryDelta } = counterSlice.actions;
+export const { incremented, sagaAsyncRandom, decremented, arbitraryDelta } = counterSlice.actions;
 
 export default counterSlice.reducer;
 

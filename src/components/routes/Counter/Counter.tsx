@@ -1,11 +1,9 @@
 import React from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { TRootState, AppDispatch } from 'store/store';
-import { incremented, asyncDelta, decremented, arbitraryDelta, thunkAsyncRandom } from "store/reducers/counter/counter"
+import { incremented, sagaAsyncRandom, decremented, arbitraryDelta, thunkAsyncRandom } from "store/reducers/counter/counter"
 
-function getRandomNumberInModule (module: number): number {
-  return Math.round(Math.random() * 2 * module - module);
-}
+const MODULE_OF_RANDOM = 20;
 
 const Counter = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -22,13 +20,10 @@ const Counter = () => {
       <button onClick={() => dispatch(incremented())}> +1 </button>
       <button onClick={() => dispatch(decremented())}> -1 </button>
       <button onClick={() => dispatch(arbitraryDelta(10))}> +10 </button>
-      <button onClick={() => {
-        const sagaResp = dispatch(asyncDelta(getRandomNumberInModule(20)));
-        console.log('sagaResp', sagaResp);
-      }}> async saga ? </button>
+      <button onClick={() => dispatch(sagaAsyncRandom(MODULE_OF_RANDOM))}> async saga ? </button>
       <button onClick={async () => {
-        const randomDelta: number = await dispatch(thunkAsyncRandom(10));
-        console.log(`random was ${randomDelta}`);
+        const randomDelta: number = await dispatch(thunkAsyncRandom(MODULE_OF_RANDOM));
+        console.log(`random was ${randomDelta}`); // saga can't get fetched data here
       }}> async thunk ? </button>
     </div>
   )

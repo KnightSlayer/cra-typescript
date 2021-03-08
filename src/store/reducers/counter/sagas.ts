@@ -1,18 +1,18 @@
-import { put, takeEvery, all } from "redux-saga/effects";
-import { AnyAction } from 'redux'
-import { asyncDelta, arbitraryDelta } from "./counter";
-import { wait } from "services/utils";
+import { put, takeEvery, call, all } from "redux-saga/effects";
+import { PayloadAction } from "@reduxjs/toolkit";
+import { sagaAsyncRandom, arbitraryDelta } from "./counter";
+import { fetchDeltaNumber } from './api'
 
-function* changeAsync({payload}: AnyAction)  {
-  yield wait(1000);
+function* changeAsync({payload: module}: PayloadAction<number>)  {
+  const delta = yield call(fetchDeltaNumber, module);
   yield put({
     type: arbitraryDelta.toString(),
-    payload,
+    payload: delta,
   });
 }
 
 function* watchIncrementAsync() {
-  yield takeEvery(asyncDelta.toString(), changeAsync);
+  yield takeEvery(sagaAsyncRandom.toString(), changeAsync);
 }
 
 export default function* rootSaga() {
