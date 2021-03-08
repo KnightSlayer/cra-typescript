@@ -1,4 +1,7 @@
+import { call, put } from 'redux-saga/effects';
+import { fetchDeltaNumber } from './api';
 import counter, { decremented, incremented, arbitraryDelta } from "./counter";
+import { changeAsync } from './sagas'
 
 describe('todos reducer', () => {
   it('should handle initial state', () => {
@@ -53,5 +56,13 @@ describe('todos reducer', () => {
     expect(
       counter({value: -1000}, arbitraryDelta(-111))
     ).toEqual({value: -1111});
+  });
+
+  it('should run changeAsync saga', () => {
+    const gen = changeAsync({type: 'type', payload: 20});
+
+    expect(gen.next().value).toEqual(call(fetchDeltaNumber, 20));
+    expect(gen.next().value).toEqual(put({type: arbitraryDelta.toString()}));
+    expect(gen.next()).toEqual({ done: true, value: undefined });
   });
 })

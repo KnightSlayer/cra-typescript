@@ -3,7 +3,7 @@ import { PayloadAction } from "@reduxjs/toolkit";
 import { sagaAsyncRandom, arbitraryDelta } from "./counter";
 import { fetchDeltaNumber } from './api'
 
-function* changeAsync({payload: module}: PayloadAction<number>)  {
+export function* changeAsync({payload: module}: PayloadAction<number>)  {
   const delta = yield call(fetchDeltaNumber, module);
   yield put({
     type: arbitraryDelta.toString(),
