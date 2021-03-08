@@ -1,7 +1,8 @@
 import { createSlice, Action, PayloadAction } from '@reduxjs/toolkit'
 import { ThunkAction } from "redux-thunk";
 import { TRootState } from "store/rootReducer";
-import { wait } from "services/utils";
+import { fetchDeltaNumber } from "./api";
+
 
 type TCounterState = {
   value: number,
@@ -21,7 +22,8 @@ const counterSlice = createSlice({
     decremented: state => {
       state.value -= 1;
     },
-    asyncDelta: (state, action: PayloadAction<number>) => state,
+    asyncDelta: (state,
+                 action: PayloadAction<number>) => state,
     arbitraryDelta: (state, action: PayloadAction<number>) => {
       state.value += action.payload;
     },
@@ -33,9 +35,8 @@ export default counterSlice.reducer;
 
 type MyThunkType<Return> = ThunkAction<Return, TRootState, unknown, Action<string>>
 
-export const randomShift = (module: number): MyThunkType<Promise<number>> => async dispatch => {
-  await wait(1111);
-  const delta = Math.round(Math.random() * 2 * module - module);
+export const thunkAsyncRandom = (module: number): MyThunkType<Promise<number>> => async dispatch => {
+  const delta = await fetchDeltaNumber(module);
 
   dispatch(arbitraryDelta(delta));
 
