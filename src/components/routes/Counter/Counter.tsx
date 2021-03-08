@@ -1,12 +1,16 @@
 import React from 'react';
-import { useSelector } from "react-redux";
-import { useAppDispatch, TRootState } from 'store/store';
-import { incremented, decremented, arbitraryDelta, randomShift } from "store/reducers/counter/counter"
+import { useDispatch, useSelector } from "react-redux";
+import { TRootState, AppDispatch } from 'store/store';
+import { incremented, asyncDelta, decremented, arbitraryDelta, randomShift } from "store/reducers/counter/counter"
+
+function getRandomNumberInModule (module: number): number {
+  return Math.round(Math.random() * 2 * module - module);
+}
 
 const Counter = () => {
-  // const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch<AppDispatch>();
   // const dispatch: AppDispatch = useDispatch();
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   const value = useSelector((state: TRootState) => state.counter.value);
 
   return (
@@ -16,12 +20,13 @@ const Counter = () => {
       <br/>
 
       <button onClick={() => dispatch(incremented())}> +1 </button>
+      <button onClick={() => dispatch(asyncDelta(getRandomNumberInModule(20)))}> async saga ? </button>
       <button onClick={() => dispatch(decremented())}> -1 </button>
       <button onClick={() => dispatch(arbitraryDelta(10))}> +10 </button>
       <button onClick={async () => {
         const randomDelta: number = await dispatch(randomShift(10));
         console.log(`random was ${randomDelta}`);
-      }}> ? </button>
+      }}> async thunk ? </button>
     </div>
   )
 }

@@ -10,6 +10,7 @@ import store from "store/store";
 import Home, { path as homePath } from './routes/Home/Home'
 import ArticlesRoutes, { path as articlesPath } from './routes/Articles'
 import Counter, { path as counterPath } from './routes/Counter/Counter'
+import Pokemons, { path as pokemonsPath } from './routes/Pokemons/Pokemons'
 import NotFound from './routes/NotFound/NotFound'
 
 
@@ -28,6 +29,9 @@ function App() {
             <li>
               <Link to={counterPath}>Counter</Link>
             </li>
+            <li>
+              <Link to={pokemonsPath}>Pokemons</Link>
+            </li>
           </ul>
         </nav>
         <Switch>
@@ -41,6 +45,10 @@ function App() {
 
           <Route path={counterPath} exact>
             <Counter/>
+          </Route>
+
+          <Route path={pokemonsPath} exact>
+            <Pokemons/>
           </Route>
 
           <Route>
