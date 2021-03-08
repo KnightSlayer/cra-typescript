@@ -12,7 +12,7 @@ function* changeAsync({payload: module}: PayloadAction<number>)  {
 }
 
 function* watchIncrementAsync() {
-  yield takeEvery(sagaAsyncRandom.toString(), changeAsync);
+  yield takeEvery(sagaAsyncRandom, changeAsync);
 }
 
 export default function* rootSaga() {
