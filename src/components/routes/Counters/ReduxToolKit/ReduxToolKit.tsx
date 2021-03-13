@@ -30,3 +30,4 @@ export const ReduxToolKit = () => {
 }
 
 export default memo(ReduxToolKit);
+export { path, subPath } from './path';

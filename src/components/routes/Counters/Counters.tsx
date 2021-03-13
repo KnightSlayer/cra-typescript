@@ -1,12 +1,12 @@
 import React, { memo } from "react";
 import Menu from "components/common/Menu";
-import ReduxToolKit from "./ReduxToolKit";
+import ReduxToolKit, { subPath as reduxSubPath } from "./ReduxToolKit";
 
 const routes = [{
   Component: ReduxToolKit,
-  subPath: 'redux-toolkit-saga-and-thunk',
+  subPath: reduxSubPath,
   label: 'ReduxToolKit',
-}]
+}];
 
 
 const Counters = () => (
@@ -15,7 +15,7 @@ const Counters = () => (
 
     <Menu routes={routes}/>
   </div>
-)
+);
 
-export default memo(Counters)
+export default memo(Counters);
 export { default as path } from './path';

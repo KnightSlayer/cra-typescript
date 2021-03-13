@@ -17,11 +17,11 @@ const Menu = ({ routes, className }: TMenuProps) => {
     <>
       <nav className={className}>
         { routes.map(({ subPath, label}) => (
-          <NavLink key={subPath} to={url + '/' + subPath}> { label } </NavLink>
+          <NavLink key={subPath} to={url + subPath}> { label } </NavLink>
         ))}
       </nav>
       { routes.map(({Component, subPath}) => (
-        <Route key={subPath} path={path + '/' + subPath}>
+        <Route key={subPath} path={path + subPath}>
           <Component />
         </Route>
       ))}
