@@ -9,7 +9,7 @@ import { Provider } from "react-redux";
 import store from "store/store";
 import Home, { path as homePath } from './routes/Home/Home'
 import ArticlesRoutes, { path as articlesPath } from './routes/Articles'
-import Counter, { path as counterPath } from './routes/Counter/Counter'
+import Counters, { path as counterPath } from './routes/Counters/Counters'
 import Pokemons, { path as pokemonsPath } from './routes/Pokemons/Pokemons'
 import NotFound from './routes/NotFound/NotFound'
 
@@ -27,7 +27,7 @@ function App() {
               <Link to={articlesPath}>Articles</Link>
             </li>
             <li>
-              <Link to={counterPath}>Counter</Link>
+              <Link to={counterPath}>Counters</Link>
             </li>
             <li>
               <Link to={pokemonsPath}>Pokemons</Link>
@@ -43,8 +43,8 @@ function App() {
             <ArticlesRoutes/>
           </Route>
 
-          <Route path={counterPath} exact>
-            <Counter/>
+          <Route path={counterPath}>
+            <Counters/>
           </Route>
 
           <Route path={pokemonsPath} exact>

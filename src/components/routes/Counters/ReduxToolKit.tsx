@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { TRootState, AppDispatch } from 'store/store';
 import { incremented, sagaAsyncRandom, decremented, arbitraryDelta, thunkAsyncRandom } from "store/reducers/counter/counter"
 
 const MODULE_OF_RANDOM = 20;
 
-const Counter = () => {
+export const ReduxToolKit = () => {
   const dispatch = useDispatch<AppDispatch>();
   // const dispatch: AppDispatch = useDispatch();
   // const dispatch = useAppDispatch();
@@ -29,6 +29,4 @@ const Counter = () => {
   )
 }
 
-export default React.memo(Counter);
-export { default as path } from './path';
-
+export default memo(ReduxToolKit);
