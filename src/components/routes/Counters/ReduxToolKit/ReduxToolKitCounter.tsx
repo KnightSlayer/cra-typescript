@@ -3,9 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { TRootState, AppDispatch } from 'store/store';
 import { incremented, sagaAsyncRandom, decremented, arbitraryDelta, thunkAsyncRandom } from "store/reducers/counter/counter"
 import CounterView from "../CounterView";
-import {changeAsync} from "../../../../store/reducers/counter/sagas";
-
-const MODULE_OF_RANDOM = 20;
 
 export const ReduxToolKitCounter = () => {
   const dispatch = useDispatch<AppDispatch>();

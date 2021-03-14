@@ -1,16 +1,16 @@
 import { memo } from "react";
 
-type TAsyncAction = {
-  func: (module: number) => void
-  label?: string
-}
+type TChangeAsync = (module: number) => void
 
 type TCounterViewProps = {
   counter: number
   increment: () => void
   decrement: () => void
   changeBy: (delta: number) => void
-  changeAsync: TAsyncAction | TAsyncAction[]
+  changeAsync: TChangeAsync | {
+    func: TChangeAsync
+    label: string
+  }[]
 }
 
 const MODULE_OF_RANDOM = 20;
@@ -29,7 +29,7 @@ const CounterView = ({ counter, increment, decrement, changeBy, changeAsync}: TC
       <button key={label} onClick={() => func(MODULE_OF_RANDOM)}> { label } </button>
     ))}
     {!Array.isArray(changeAsync) && (
-      <button onClick={() => changeAsync.func(MODULE_OF_RANDOM)}> { changeAsync.label || 'random async'} </button>
+      <button onClick={() => changeAsync(MODULE_OF_RANDOM)}> random async </button>
     )}
   </div>
 )

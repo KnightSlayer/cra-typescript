@@ -1,12 +1,20 @@
 import { memo } from "react";
 import Menu from "components/common/Menu";
-import ReduxToolKit, { subPath as reduxSubPath } from "./ReduxToolKit/ReduxToolKitCounter";
+import ReduxToolKitCounter, { subPath as reduxSubPath } from "./ReduxToolKit";
+import ZustandCounter , { subPath as zustandSubPath } from "./Zustand";
 
-const routes = [{
-  Component: ReduxToolKit,
-  subPath: reduxSubPath,
-  label: 'ReduxToolKit',
-}];
+const routes = [
+  {
+    Component: ReduxToolKitCounter,
+    subPath: reduxSubPath,
+    label: 'ReduxToolKit',
+  },
+  {
+    Component: ZustandCounter,
+    subPath: zustandSubPath,
+    label: 'Zustand',
+  },
+];
 
 
 const Counters = () => (
