@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -60,4 +60,4 @@ function App() {
   );
 }
 
-export default React.memo(App);
+export default memo(App);

@@ -1,6 +1,6 @@
-import React, { memo } from "react";
+import { memo } from "react";
 import Menu from "components/common/Menu";
-import ReduxToolKit, { subPath as reduxSubPath } from "./ReduxToolKit";
+import ReduxToolKit, { subPath as reduxSubPath } from "./ReduxToolKit/ReduxToolKitCounter";
 
 const routes = [{
   Component: ReduxToolKit,
