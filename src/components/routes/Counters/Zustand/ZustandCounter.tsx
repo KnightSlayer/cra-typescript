@@ -13,15 +13,16 @@ type TState = {
   changeBy: (by: number) => void
   changeAsync: (module: number) => void
 }
-
+type TImmerStateCreator<T extends State> = StateCreator<T, (fn: (draft: Draft<T>) => void) => void>
 // here is no nested objects so it is useless here
 const immer = <T extends State>(
-  // config: TStateCreator<T>
-  config: StateCreator<T, (fn: (draft: Draft<T>) => void) => void>
+  config: TImmerStateCreator<T>
 ): StateCreator<T> => (set, get, api) =>
   config((fn) => set(produce(fn) as (state: T) => T), get, api)
 
-const createStore = <TState extends State>(createState: StateCreator<TState, (fn: (draft: Draft<TState>) => void) => void>): UseStore<TState> => create(devtools(immer(createState), 'ZustandCounter'))
+const createStore = <TState extends State>(
+  createState: TImmerStateCreator<TState>
+): UseStore<TState> => create(devtools(immer(createState), 'ZustandCounter'))
 
 const useStore = createStore<TState>((set, get) => ({
   counter: 0,
