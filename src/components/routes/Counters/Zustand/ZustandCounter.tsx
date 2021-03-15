@@ -1,5 +1,8 @@
 import { memo } from "react";
-import create from 'zustand'
+import create, { State, StateCreator, UseStore } from 'zustand'
+import { devtools } from 'zustand/middleware'
+import produce, { Draft } from 'immer'
+
 import { fetchDeltaNumber } from "store/reducers/counter/api";
 import CounterView from "../CounterView";
 
@@ -11,7 +14,16 @@ type TState = {
   changeAsync: (module: number) => void
 }
 
-const useStore = create<TState>((set, get) => ({
+// here is no nested objects so it is useless here
+const immer = <T extends State>(
+  // config: TStateCreator<T>
+  config: StateCreator<T, (fn: (draft: Draft<T>) => void) => void>
+): StateCreator<T> => (set, get, api) =>
+  config((fn) => set(produce(fn) as (state: T) => T), get, api)
+
+const createStore = <TState extends State>(createState: StateCreator<TState, (fn: (draft: Draft<TState>) => void) => void>): UseStore<TState> => create(devtools(immer(createState), 'ZustandCounter'))
+
+const useStore = createStore<TState>((set, get) => ({
   counter: 0,
   increment: () => set(state => ({ counter: state.counter + 1 })),
   decrement: () => set(state => ({ counter: state.counter - 1 })),
