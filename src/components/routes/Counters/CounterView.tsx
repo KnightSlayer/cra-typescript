@@ -11,12 +11,13 @@ type TCounterViewProps = {
     func: TChangeAsync
     label: string
   }[]
+  isLoading: boolean
 }
 
 const MODULE_OF_RANDOM = 20;
 const DELTA = 10;
 
-const CounterView = ({ counter, increment, decrement, changeBy, changeAsync}: TCounterViewProps) => (
+const CounterView = ({ counter, increment, decrement, changeBy, changeAsync, isLoading}: TCounterViewProps) => (
   <div>
     Counter: { counter }
 
@@ -26,10 +27,21 @@ const CounterView = ({ counter, increment, decrement, changeBy, changeAsync}: TC
     <button onClick={decrement}> -1 </button>
     <button onClick={() => changeBy(DELTA)}> +{DELTA} </button>
     {Array.isArray(changeAsync) && changeAsync.map(({func, label}) => (
-      <button key={label} onClick={() => func(MODULE_OF_RANDOM)}> { label } </button>
+      <button
+        key={label}
+        onClick={() => func(MODULE_OF_RANDOM)}
+        disabled={isLoading}
+      >
+        { label }
+      </button>
     ))}
     {!Array.isArray(changeAsync) && (
-      <button onClick={() => changeAsync(MODULE_OF_RANDOM)}> random async </button>
+      <button
+        onClick={() => changeAsync(MODULE_OF_RANDOM)}
+        disabled={isLoading}
+      >
+        random async
+      </button>
     )}
   </div>
 )

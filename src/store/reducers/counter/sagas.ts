@@ -1,12 +1,12 @@
 import { put, takeEvery, call, all } from "redux-saga/effects";
 import { PayloadAction } from "@reduxjs/toolkit";
-import { sagaAsyncRandom, arbitraryDelta } from "./counter";
+import { sagaAsyncRandom, finishLoading } from "./counter";
 import { fetchDeltaNumber } from './api'
 
 export function* changeAsync({payload: module}: PayloadAction<number>)  {
   const delta = yield call(fetchDeltaNumber, module);
   yield put({
-    type: arbitraryDelta.toString(),
+    type: finishLoading.toString(),
     payload: delta,
   });
 }

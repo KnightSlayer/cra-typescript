@@ -9,6 +9,7 @@ export const ReduxToolKitCounter = () => {
   // const dispatch: AppDispatch = useDispatch();
   // const dispatch = useAppDispatch();
   const value = useSelector((state: TRootState) => state.counter.value);
+  const isLoading = useSelector((state: TRootState) => state.counter.isLoading);
   const increment = useCallback(() => dispatch(incremented()), []);
   const decrement = useCallback(() => dispatch(decremented()), []);
   const changeBy = useCallback((delta) => dispatch(arbitraryDelta(delta)), []);
@@ -33,6 +34,7 @@ export const ReduxToolKitCounter = () => {
       decrement={decrement}
       changeBy={changeBy}
       changeAsync={changeAsync}
+      isLoading={isLoading}
     />
   )
 }

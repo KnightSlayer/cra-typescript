@@ -6,6 +6,7 @@ import { fetchDeltaNumber } from "store/reducers/counter/api";
 
 type TState = {
   counter: number
+  isLoading: boolean
   increment: () => void
   decrement: () => void
   changeBy: (by: number) => void
@@ -24,15 +25,17 @@ const createStore = <TState extends State>(
 
 const useStore = createStore<TState>((set, get) => ({
   counter: 0,
+  isLoading: false,
   increment: () => set(state => ({ counter: state.counter + 1 })),
   decrement: () => set(state => ({ counter: state.counter - 1 })),
   changeBy: (delta: number) => set(state => ({ counter: state.counter + delta })),
   changeAsync: async (module: number) => {
+    set(() => ({isLoading: true}));
     const delta = await fetchDeltaNumber(module);
-    // option 1
-    // set(state => ({ counter: state.counter + delta }));
-    // option 2
-    get().changeBy(delta);
+    set(state => ({
+      counter: state.counter + delta,
+      isLoading: false,
+    }));
   },
 }));
 

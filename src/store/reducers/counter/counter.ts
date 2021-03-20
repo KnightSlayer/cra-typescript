@@ -6,10 +6,12 @@ import { fetchDeltaNumber } from "./api";
 
 type TCounterState = {
   value: number,
+  isLoading: boolean,
 }
 
 const initialState: TCounterState = {
   value: 0,
+  isLoading: false,
 }
 
 const counterSlice = createSlice({
@@ -22,23 +24,32 @@ const counterSlice = createSlice({
     decremented: state => {
       state.value -= 1;
     },
-    sagaAsyncRandom: (state,
-                 action: PayloadAction<number>) => state,
+    startLoading: (state) => {
+      state.isLoading = true;
+    },
+    finishLoading: (state, action: PayloadAction<number>) => {
+      state.isLoading = false;
+      state.value += action.payload;
+    },
+    sagaAsyncRandom: (state, action: PayloadAction<number>) => {
+      state.isLoading = true;
+    },
     arbitraryDelta: (state, action: PayloadAction<number>) => {
       state.value += action.payload;
     },
   }
 })
-export const { incremented, sagaAsyncRandom, decremented, arbitraryDelta } = counterSlice.actions;
+export const { incremented, sagaAsyncRandom, decremented, arbitraryDelta, finishLoading } = counterSlice.actions;
 
 export default counterSlice.reducer;
 
 type MyThunkType<Return> = ThunkAction<Return, TRootState, unknown, Action<string>>
 
 export const thunkAsyncRandom = (module: number): MyThunkType<Promise<number>> => async dispatch => {
+  dispatch(counterSlice.actions.startLoading());
   const delta = await fetchDeltaNumber(module);
 
-  dispatch(arbitraryDelta(delta));
+  dispatch(counterSlice.actions.finishLoading(delta));
 
   return delta;
 }
