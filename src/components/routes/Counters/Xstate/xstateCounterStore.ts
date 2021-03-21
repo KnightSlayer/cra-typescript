@@ -16,6 +16,10 @@ export enum MachineTransitions {
   LOAD_FAILURE = 'LOAD_FAILURE',
 }
 
+enum MachineActions {
+  CHANGE_BY = 'CHANGE_BY',
+}
+
 const counterMachine = createMachine<TCounterContext>(
   {
     id: "counter",
@@ -26,15 +30,15 @@ const counterMachine = createMachine<TCounterContext>(
     states: {
       [MachineStates.IDLE]: {
         on: {
-          [MachineTransitions.CHANGE]: {actions: ['changeBy']},
+          [MachineTransitions.CHANGE]: {actions: [MachineActions.CHANGE_BY]},
           [MachineTransitions.LOAD_START]: MachineStates.LOADING,
         }
       },
       [MachineStates.LOADING]: {
         on: {
-          [MachineTransitions.CHANGE]: {actions: ['changeBy']},
+          [MachineTransitions.CHANGE]: {actions: [MachineActions.CHANGE_BY]},
           [MachineTransitions.LOAD_SUCCESS]: {
-            actions: ['changeBy'],
+            actions: [MachineActions.CHANGE_BY],
             target: MachineStates.IDLE,
           },
           [MachineTransitions.LOAD_FAILURE]: MachineStates.ERROR,
@@ -47,7 +51,7 @@ const counterMachine = createMachine<TCounterContext>(
   },
   {
     actions: {
-      changeBy: assign({
+      [MachineActions.CHANGE_BY]: assign({
         count: (context, event) => context.count + event.value,
       }),
     },
