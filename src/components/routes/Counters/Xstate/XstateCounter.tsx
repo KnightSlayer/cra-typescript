@@ -1,7 +1,7 @@
 import { memo } from "react";
 import { useMachine } from "@xstate/react";
 import { fetchDeltaNumber } from "store/reducers/counter/api";
-import counterMachine, { MachineStates, MachineActions} from './xstateCounterStore'
+import counterMachine, { MachineStates, MachineTransitions} from './xstateCounterStore'
 import CounterView from "../CounterView";
 
 
@@ -13,17 +13,17 @@ const XstateCounter = () => {
     isLoading={value === MachineStates.LOADING}
     counter={count}
     changeAsync={async (module) => {
-      send(MachineActions.LOAD_START);
+      send(MachineTransitions.LOAD_START);
       try {
         const delta = await fetchDeltaNumber(module);
-        send({type: MachineActions.LOAD_SUCCESS, value: delta});
+        send({type: MachineTransitions.LOAD_SUCCESS, value: delta});
       } catch (err) {
-        send(MachineActions.LOAD_FAILURE);
+        send(MachineTransitions.LOAD_FAILURE);
       }
     }}
-    increment={() => send({type: MachineActions.CHANGE, value: 1})}
-    decrement={() => send({type: MachineActions.CHANGE, value: -1})}
-    changeBy={(delta) => send({type: MachineActions.CHANGE, value: delta})}
+    increment={() => send({type: MachineTransitions.CHANGE, value: 1})}
+    decrement={() => send({type: MachineTransitions.CHANGE, value: -1})}
+    changeBy={(delta) => send({type: MachineTransitions.CHANGE, value: delta})}
   />
 }
 

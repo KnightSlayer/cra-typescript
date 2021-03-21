@@ -9,46 +9,49 @@ export enum MachineStates {
   LOADING = "LOADING",
   ERROR = 'ERROR',
 }
-export enum MachineActions {
+export enum MachineTransitions {
   CHANGE = 'CHANGE',
   LOAD_START = 'LOAD_START',
   LOAD_SUCCESS = 'LOAD_SUCCESS',
   LOAD_FAILURE = 'LOAD_FAILURE',
 }
 
-const changeAction = assign({
-  count: (context: TCounterContext, event: AnyEventObject) => {
-    return context.count + event.value;
-  }
-});
-
-const counterMachine = createMachine<TCounterContext>({
-  id: "counter",
-  initial: MachineStates.IDLE,
-  context: {
-    count: 0
-  },
-  states: {
-    [MachineStates.IDLE]: {
-      on: {
-        [MachineActions.CHANGE]: {actions: [changeAction]},
-        [MachineActions.LOAD_START]: MachineStates.LOADING,
-      }
+const counterMachine = createMachine<TCounterContext>(
+  {
+    id: "counter",
+    initial: MachineStates.IDLE,
+    context: {
+      count: 0
     },
-    [MachineStates.LOADING]: {
-      on: {
-        [MachineActions.CHANGE]: {actions: [changeAction]},
-        [MachineActions.LOAD_SUCCESS]: {
-          actions: [changeAction],
-          target: MachineStates.IDLE,
+    states: {
+      [MachineStates.IDLE]: {
+        on: {
+          [MachineTransitions.CHANGE]: {actions: ['changeBy']},
+          [MachineTransitions.LOAD_START]: MachineStates.LOADING,
+        }
+      },
+      [MachineStates.LOADING]: {
+        on: {
+          [MachineTransitions.CHANGE]: {actions: ['changeBy']},
+          [MachineTransitions.LOAD_SUCCESS]: {
+            actions: ['changeBy'],
+            target: MachineStates.IDLE,
+          },
+          [MachineTransitions.LOAD_FAILURE]: MachineStates.ERROR,
         },
-        [MachineActions.LOAD_FAILURE]: MachineStates.ERROR,
+      },
+      [MachineStates.ERROR]: {
+
       },
     },
-    [MachineStates.ERROR]: {
-
+  },
+  {
+    actions: {
+      changeBy: assign({
+        count: (context, event) => context.count + event.value,
+      }),
     },
-  }
-});
+  },
+);
 
 export default counterMachine;
