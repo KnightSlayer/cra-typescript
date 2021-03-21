@@ -1,5 +1,8 @@
 import React, { memo, FC, ComponentClass } from "react";
 import { Route, NavLink, useRouteMatch } from "react-router-dom";
+import cn from 'classnames';
+
+import styles from './Menu.module.scss';
 
 type TMenuProps = {
   routes: {
@@ -15,9 +18,16 @@ const Menu = ({ routes, className }: TMenuProps) => {
 
   return (
     <>
-      <nav className={className}>
+      <nav className={cn(styles.nav, className)}>
         { routes.map(({ subPath, label}) => (
-          <NavLink key={subPath} to={url + subPath}> { label } </NavLink>
+          <NavLink
+            key={subPath}
+            to={url + subPath}
+            className={styles.link}
+            activeClassName={styles.active}
+          >
+            { label }
+          </NavLink>
         ))}
       </nav>
       { routes.map(({Component, subPath}) => (
