@@ -2,6 +2,7 @@ import { memo } from "react";
 import Menu from "components/common/Menu";
 import ReduxToolKitCounter, { subPath as reduxSubPath } from "./ReduxToolKit";
 import ZustandCounter , { subPath as zustandSubPath } from "./Zustand";
+import XstateCounter , { subPath as xstateSubPath } from "./Xstate";
 
 const routes = [
   {
@@ -13,6 +14,11 @@ const routes = [
     Component: ZustandCounter,
     subPath: zustandSubPath,
     label: 'Zustand',
+  },
+  {
+    Component: XstateCounter,
+    subPath: xstateSubPath,
+    label: 'XState',
   },
 ];
 
