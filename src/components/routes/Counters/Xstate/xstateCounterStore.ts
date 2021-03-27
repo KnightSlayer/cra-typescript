@@ -30,13 +30,11 @@ const counterMachine = createMachine<TCounterContext>(
     states: {
       [MachineStates.IDLE]: {
         on: {
-          [MachineEvents.CHANGE]: {actions: [MachineActions.CHANGE_BY]},
           [MachineEvents.LOAD_START]: MachineStates.LOADING,
         }
       },
       [MachineStates.LOADING]: {
         on: {
-          [MachineEvents.CHANGE]: {actions: [MachineActions.CHANGE_BY]},
           [MachineEvents.LOAD_SUCCESS]: {
             actions: [MachineActions.CHANGE_BY],
             target: MachineStates.IDLE,
@@ -47,6 +45,9 @@ const counterMachine = createMachine<TCounterContext>(
       [MachineStates.ERROR]: {
 
       },
+    },
+    on: {
+      [MachineEvents.CHANGE]: {actions: [MachineActions.CHANGE_BY]},
     },
   },
   {
