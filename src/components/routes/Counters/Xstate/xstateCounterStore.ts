@@ -9,7 +9,7 @@ export enum MachineStates {
   LOADING = "LOADING",
   ERROR = 'ERROR',
 }
-export enum MachineTransitions {
+export enum MachineEvents {
   CHANGE = 'CHANGE',
   LOAD_START = 'LOAD_START',
   LOAD_SUCCESS = 'LOAD_SUCCESS',
@@ -30,18 +30,18 @@ const counterMachine = createMachine<TCounterContext>(
     states: {
       [MachineStates.IDLE]: {
         on: {
-          [MachineTransitions.CHANGE]: {actions: [MachineActions.CHANGE_BY]},
-          [MachineTransitions.LOAD_START]: MachineStates.LOADING,
+          [MachineEvents.CHANGE]: {actions: [MachineActions.CHANGE_BY]},
+          [MachineEvents.LOAD_START]: MachineStates.LOADING,
         }
       },
       [MachineStates.LOADING]: {
         on: {
-          [MachineTransitions.CHANGE]: {actions: [MachineActions.CHANGE_BY]},
-          [MachineTransitions.LOAD_SUCCESS]: {
+          [MachineEvents.CHANGE]: {actions: [MachineActions.CHANGE_BY]},
+          [MachineEvents.LOAD_SUCCESS]: {
             actions: [MachineActions.CHANGE_BY],
             target: MachineStates.IDLE,
           },
-          [MachineTransitions.LOAD_FAILURE]: MachineStates.ERROR,
+          [MachineEvents.LOAD_FAILURE]: MachineStates.ERROR,
         },
       },
       [MachineStates.ERROR]: {
