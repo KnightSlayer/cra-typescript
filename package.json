@@ -54,6 +54,7 @@
     "node-sass": "4",
     "react-scripts": "4.0.1",
     "typescript": "^4.0.3",
+    "valtio": "^1.0.4",
     "web-vitals": "^0.2.4"
   }
 }
