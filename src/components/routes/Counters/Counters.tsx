@@ -31,7 +31,7 @@ const routes = [
 
 const Counters = () => (
   <div>
-    <h1> Counter components made from different State Management tools</h1>
+    <h1> Counter components made with different State Management tools</h1>
 
     <Menu routes={routes}/>
   </div>
