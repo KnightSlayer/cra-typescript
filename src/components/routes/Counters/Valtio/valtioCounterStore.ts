@@ -1,7 +1,9 @@
 import { proxy } from 'valtio'
+import { devtools } from 'valtio/utils'
 import { fetchDeltaNumber } from "store/reducers/counter/api";
 
 const state = proxy({ count: 0, isLoading: false })
+devtools(state, 'valtio counter state')
 
 export default state;
 
