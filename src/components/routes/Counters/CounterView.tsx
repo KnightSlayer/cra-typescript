@@ -18,7 +18,7 @@ const MODULE_OF_RANDOM = 20;
 const DELTA = 10;
 
 const CounterView = ({ counter, increment, decrement, changeBy, changeAsync, isLoading}: TCounterViewProps) => (
-  <div>
+  <div style={{marginTop: 10}}>
     Counter: { counter }
 
     <br/>
