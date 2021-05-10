@@ -7,7 +7,7 @@ type TJotaiCounterState = {
   isLoading: boolean
 }
 
-const state = atom({
+const stateAtom = atom({
   count: 0,
   isLoading: false,
 });
@@ -20,4 +20,16 @@ export const changeAsync = async (module: number, {state, setState}: {state: TJo
   setState(s => ({...s, isLoading: false, count: s.count + delta}));
 }
 
-export default state
+export default stateAtom
+
+export const changeAsyncAtom = atom(
+  (get) => get(stateAtom),
+  async (get, set, module: number) => {
+    const delta = await fetchDeltaNumber(module);
+    const value = get(stateAtom);
+    set(stateAtom, {
+      ...value,
+      count: value.count + delta,
+    });
+  }
+)

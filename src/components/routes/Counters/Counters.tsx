@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, Suspense } from "react";
 import Menu from "components/common/Menu";
 import { RecoilRoot } from "recoil";
 import ReduxToolKitCounter, { subPath as reduxSubPath } from "./ReduxToolKit";
