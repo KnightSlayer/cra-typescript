@@ -6,6 +6,7 @@ import ZustandCounter , { subPath as zustandSubPath } from "./Zustand";
 import XstateCounter , { subPath as xstateSubPath } from "./Xstate";
 import ValtioCounter , { subPath as valtioSubPath } from "./Valtio";
 import RecoilCounter , { subPath as recoilSubPath } from "./Recoil";
+import JotaiCounter , { subPath as jotaiSubPath } from "./Jotai";
 
 const routes = [
   {
@@ -32,6 +33,11 @@ const routes = [
     Component: RecoilCounter,
     subPath: recoilSubPath,
     label: 'Recoil',
+  },
+  {
+    Component: JotaiCounter,
+    subPath: jotaiSubPath,
+    label: 'Jotai',
   },
 ];
 
