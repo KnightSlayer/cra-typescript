@@ -2,7 +2,7 @@ import { memo } from "react";
 import { useAtom } from 'jotai'
 import { useAtomDevtools } from 'jotai/devtools'
 import CounterView from "../CounterView";
-import counterAtom, { changeAsync, changeAsyncAtom } from "./jotaiCounterStore";
+import counterAtom, { changeAsync, /*changeAsyncAtom*/ } from "./jotaiCounterStore";
 
 const JotaiCounter = () => {
   const [counterState, setCounterState] = useAtom(counterAtom);

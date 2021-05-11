@@ -1,4 +1,4 @@
-import { memo, Suspense } from "react";
+import { memo } from "react";
 import Menu from "components/common/Menu";
 import { RecoilRoot } from "recoil";
 import ReduxToolKitCounter, { subPath as reduxSubPath } from "./ReduxToolKit";
@@ -7,6 +7,7 @@ import XstateCounter , { subPath as xstateSubPath } from "./Xstate";
 import ValtioCounter , { subPath as valtioSubPath } from "./Valtio";
 import RecoilCounter , { subPath as recoilSubPath } from "./Recoil";
 import JotaiCounter , { subPath as jotaiSubPath } from "./Jotai";
+import MobxCounter , { subPath as mobxSubPath } from "./Mobx";
 
 const routes = [
   {
@@ -38,6 +39,11 @@ const routes = [
     Component: JotaiCounter,
     subPath: jotaiSubPath,
     label: 'Jotai',
+  },
+  {
+    Component: MobxCounter,
+    subPath: mobxSubPath,
+    label: 'MobX',
   },
 ];
 
