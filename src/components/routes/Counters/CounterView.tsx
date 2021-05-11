@@ -2,7 +2,7 @@ import { memo } from "react";
 
 type TChangeAsync = (module: number) => void
 
-type TCounterViewProps = {
+export type TCounterViewProps = {
   counter: number
   increment: () => void
   decrement: () => void

@@ -1,13 +1,15 @@
-import { memo } from "react";
+import {memo, ReactNode} from "react";
 import Menu from "components/common/Menu";
 import { RecoilRoot } from "recoil";
+import { CounterContextProvider } from "./Context/counterContext";
 import ReduxToolKitCounter, { subPath as reduxSubPath } from "./ReduxToolKit";
-import ZustandCounter , { subPath as zustandSubPath } from "./Zustand";
-import XstateCounter , { subPath as xstateSubPath } from "./Xstate";
-import ValtioCounter , { subPath as valtioSubPath } from "./Valtio";
-import RecoilCounter , { subPath as recoilSubPath } from "./Recoil";
-import JotaiCounter , { subPath as jotaiSubPath } from "./Jotai";
-import MobxCounter , { subPath as mobxSubPath } from "./Mobx";
+import ZustandCounter, { subPath as zustandSubPath } from "./Zustand";
+import XstateCounter, { subPath as xstateSubPath } from "./Xstate";
+import ValtioCounter, { subPath as valtioSubPath } from "./Valtio";
+import RecoilCounter, { subPath as recoilSubPath } from "./Recoil";
+import JotaiCounter, { subPath as jotaiSubPath } from "./Jotai";
+import MobxCounter, { subPath as mobxSubPath } from "./Mobx";
+import ContextCounter, { subPath as contextSubPath } from "./Context"
 
 const routes = [
   {
@@ -45,17 +47,30 @@ const routes = [
     subPath: mobxSubPath,
     label: 'MobX',
   },
+  {
+    Component: ContextCounter,
+    subPath: contextSubPath,
+    label: 'Context',
+  },
 ];
+
+const HelperWrappers = ({children}: {children: ReactNode}) => (
+  <RecoilRoot>
+    <CounterContextProvider>
+      {children}
+    </CounterContextProvider>
+  </RecoilRoot>
+)
 
 
 const Counters = () => (
-  <RecoilRoot>
+  <HelperWrappers>
     <div>
       <h1> Counter components made with different State Management tools</h1>
 
       <Menu routes={routes}/>
     </div>
-  </RecoilRoot>
+  </HelperWrappers>
 );
 
 export default memo(Counters);
