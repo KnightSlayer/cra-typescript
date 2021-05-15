@@ -11,6 +11,7 @@ import JotaiCounter, { subPath as jotaiSubPath } from "./Jotai";
 import MobxCounter, { subPath as mobxSubPath } from "./Mobx";
 import ContextCounter, { subPath as contextSubPath } from "./Context"
 import EasyPeasyCounter, { subPath as easyPeasySubPath } from "./EasyPeasy"
+import EffectorCounter , { subPath as effectorSubPath } from "./Effector"
 
 const routes = [
   {
@@ -57,6 +58,11 @@ const routes = [
     Component: EasyPeasyCounter,
     subPath: easyPeasySubPath,
     label: 'Easy Peasy',
+  },
+  {
+    Component: EffectorCounter,
+    subPath: effectorSubPath,
+    label: 'Effector  ',
   },
 ];
 
